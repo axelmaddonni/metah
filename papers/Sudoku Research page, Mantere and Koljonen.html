@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<!-- saved from url=(0036)http://lipas.uwasa.fi/~timan/sudoku/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   
+   <meta name="Author" content="Timo Mantere">
+   <meta name="GENERATOR" content="Mozilla/4.79 [en] (WinNT; U) [Netscape]">
+   <meta name="Description" content="Just one more silly useless Homepage.">
+   <title>Sudoku page</title>
+</head>
+<body text="#400010" bgcolor="#FFFFD0" link="#004000" vlink="#B0B000" alink="#B04000">
+<b><font color="#0000FF"><font size="+3">Sudoku research page</font></font></b><p><b><font color="#0000FF">
+
+<a href="http://www.uwasa.fi/~timan/" target="new">Timo Mantere</a> &amp; <a href="http://www.uwasa.fi/~jako/" target="new">Janne Koljonen</a><br>University of Vaasa</font></b>
+</p><p>
+
+
+<style type="text/css" media="screen">
+<!--
+	div{
+		padding:0px;
+		margin:0px;
+		border: none;
+		}
+	div#header{
+		width:100%;
+		font-size:large;
+		background:#F5F5F5;
+		}
+	div#main{
+		width:100%;
+		}
+	div#left{
+		width:50%;
+		background:transparent;
+		float:left;
+		}
+	div#left a{
+		display:block;
+		margin-right:4px;
+		}
+	div#right{
+		width:50%;
+		background:transparent;
+		float:right;
+		}
+	div#right p#para{
+		margin:4px;
+		}
+-->
+</style>
+
+
+
+
+
+
+
+
+</p><p>
+</p><hr>
+<p>
+
+<font color="#FF0000">
+<b>The test Sudoku instances used in the paper:</b><br></font>
+<font color="#000000">[1] Mantere, Timo and Janne Koljonen (2008). Solving and Analyzing Sudokus with Cultural Algorithms. In Proceedings of 2008 IEEE World Congress on Computational Intelligence (WCCI 2008), 1-6 June, Hong Kong, China, pages 4054-4061.</font>(<a href="http://lipas.uwasa.fi/~timan/sudoku/2008_hongkong.pdf">Presentation slides</a>).
+</p><p>
+
+
+</p><div id="left">
+
+
+<table border="1">
+<caption><em>Benchmark Sudokus in tables 2 &amp; 4</em> [1]</caption>
+<tbody><tr><td rowspan="2">Difficulty rating</td><td colspan="3">Sudoku instance
+</td></tr><tr><td>a</td><td>b</td><td>c
+</td></tr><tr><td>1</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s01a.txt">s01a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s01b.txt">s01b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s01c.txt">s01c.txt</a>
+</td></tr><tr><td>2</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s02a.txt">s02a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s02b.txt">s02b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s02c.txt">s02c.txt</a>
+</td></tr><tr><td>3</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s03a.txt">s03a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s03b.txt">s03b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s03c.txt">s03c.txt</a>
+</td></tr><tr><td>4</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s04a.txt">s04a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s04b.txt">s04b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s04c.txt">s04c.txt</a>
+</td></tr><tr><td>5</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s05a.txt">s05a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s05b.txt">s05b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s05c.txt">s05c.txt</a>
+</td></tr><tr><td>E</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s06a.txt">s06a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s06b.txt">s06b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s06c.txt">s06c.txt</a>
+</td></tr><tr><td>C</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s07a.txt">s07a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s07b.txt">s07b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s07c.txt">s07c.txt</a>
+</td></tr><tr><td>D</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s08a.txt">s08a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s08b.txt">s08b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s08c.txt">s08c.txt</a>
+</td></tr><tr><td>SD</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s09a.txt">s09a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s09b.txt">s09b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s09c.txt">s09c.txt</a>
+</td></tr><tr><td>Easy</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s10a.txt">s10a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s10b.txt">s10b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s10c.txt">s10c.txt</a>
+</td></tr><tr><td>Medium</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s11a.txt">s11a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s11b.txt">s11b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s11c.txt">s11c.txt</a>
+</td></tr><tr><td>Hard</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s12a.txt">s12a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s12b.txt">s12b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s12c.txt">s12c.txt</a>
+</td></tr><tr><td>GA-E</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s13a.txt">s13a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s13b.txt">s13b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s13c.txt">s13c.txt</a>
+</td></tr><tr><td>GA-M</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s14a.txt">s14a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s14b.txt">s14b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s14c.txt">s14c.txt</a>
+</td></tr><tr><td>GA-H</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s15a.txt">s15a.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s15b.txt">s15b.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s15c.txt">s15c.txt</a>
+</td></tr><tr><td>AI Escargot</td><td colspan="3"><a href="http://lipas.uwasa.fi/~timan/sudoku/s16.txt">s16.txt</a>
+</td></tr></tbody></table>
+<a href="http://lipas.uwasa.fi/~timan/sudoku/sudokus.zip">Also available as zip file: sudokus.zip</a>
+
+<p>
+</p></div>
+<div id="right">
+
+
+<table border="1">
+<caption><em>Corresponding solutions for these Sudokus</em></caption>
+<tbody><tr><td rowspan="2">Difficulty rating</td><td colspan="3">Sudoku instance
+</td></tr><tr><td>a</td><td>b</td><td>c
+</td></tr><tr><td>1</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s01a_s.txt">s01a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s01b_s.txt">s01b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s01c_s.txt">s01c_s.txt</a>
+</td></tr><tr><td>2</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s02a_s.txt">s02a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s02b_s.txt">s02b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s02c_s.txt">s02c_s.txt</a>
+</td></tr><tr><td>3</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s03a_s.txt">s03a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s03b_s.txt">s03b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s03c_s.txt">s03c_s.txt</a>
+</td></tr><tr><td>4</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s04a_s.txt">s04a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s04b_s.txt">s04b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s04c_s.txt">s04c_s.txt</a>
+</td></tr><tr><td>5</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s05a_s.txt">s05a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s05b_s.txt">s05b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s05c_s.txt">s05c_s.txt</a>
+</td></tr><tr><td>E</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s06a_s.txt">s06a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s06b_s.txt">s06b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s06c_s.txt">s06c_s.txt</a>
+</td></tr><tr><td>C</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s07a_s.txt">s07a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s07b_s.txt">s07b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s07c_s.txt">s07c_s.txt</a>
+</td></tr><tr><td>D</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s08a_s.txt">s08a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s08b_s.txt">s08b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s08c_s.txt">s08c_s.txt</a>
+</td></tr><tr><td>SD</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s09a_s.txt">s09a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s09b_s.txt">s09b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s09c_s.txt">s09c_s.txt</a>
+</td></tr><tr><td>Easy</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s10a_s.txt">s10a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s10b_s.txt">s10b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s10c_s.txt">s10c_s.txt</a>
+</td></tr><tr><td>Medium</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s11a_s.txt">s11a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s11b_s.txt">s11b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s11c_s.txt">s11c_s.txt</a>
+</td></tr><tr><td>hard</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s12a_s.txt">s12a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s12b_s.txt">s12b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s12c_s.txt">s12c_s.txt</a>
+</td></tr><tr><td>GA-E</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s13a_s.txt">s13a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s13b_s.txt">s13b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s13c_s.txt">s13c_s.txt</a>
+</td></tr><tr><td>GA-M</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s14a_s.txt">s14a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s14b_s.txt">s14b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s14c_s.txt">s14c_s.txt</a>
+</td></tr><tr><td>GA-H</td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s15a_s.txt">s15a_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s15b_s.txt">s15b_s.txt</a></td><td><a href="http://lipas.uwasa.fi/~timan/sudoku/s15c_s.txt">s15c_s.txt</a>
+</td></tr><tr><td>AI Escargot</td><td colspan="3"><a href="http://lipas.uwasa.fi/~timan/sudoku/s16_s.txt">s16_s.txt</a>
+</td></tr></tbody></table>
+Also available as in one zip file: <a href="http://lipas.uwasa.fi/~timan/sudoku/solutions.zip">solutions.zip</a>
+<p>
+</p></div>
+
+<p>
+
+
+Note that Sudokus named as <a href="http://lipas.uwasa.fi/~timan/sudoku/s10a.txt">Easy 1</a>, <a href="http://lipas.uwasa.fi/~timan/sudoku/s10b.txt">Easy 2</a>, <a href="http://lipas.uwasa.fi/~timan/sudoku/s10c.txt">Easy 3</a>, <a href="http://lipas.uwasa.fi/~timan/sudoku/s11a.txt">Medium</a>, <a href="http://lipas.uwasa.fi/~timan/sudoku/s12a.txt">Hard</a> in the table 3 of [1] are respectively the same as s10a.txt, s10b.txt, s10c.txt, s11a.txt and s12a.txt in the previous tables.
+</p><p>
+
+
+</p><p>
+</p><hr>
+<p>
+<font color="#FF0000">
+<b>The best results with the previous benchmark Sudokus with different methods:</b><br></font>
+</p><p>
+
+<table border="1">
+<caption><em>Average number of trials needed (in 300 runs) to Solve benchmark Sudokus with different Evolutionary Algorithm methods</em></caption>
+<tbody><tr><th rowspan="2">Difficulty rating</th><th colspan="3">Genetic algorithm (GA)</th><th></th><th colspan="3">Cultural algorithm (CA)</th><th></th><th colspan="3">Ant colony optimization (ACO)
+</th></tr><tr><th>a</th><th>b</th><th>c</th><th></th><th>a</th><th>b</th><th>c</th><th></th><th>a</th><th>b</th><th>c
+
+</th></tr><tr><th>1</th><td align="right">1264</td><td align="right">634</td><td align="right">4787</td><th>
+</th><td align="right">1141</td><td align="right">665</td><td align="right">4732
+</td><th></th><td align="right">758</td><td align="right">430</td><td align="right">4054
+</td></tr><tr><th>2</th><td align="right">8765</td><td align="right">32618</td><td align="right">12828</td><th>
+</th><td align="right">8187</td><td align="right">33116</td><td align="right">14515</td><th></th><td align="right">26896</td><td align="right">10564</td><td align="right">6387
+</td></tr><tr><th>3</th><td align="right">17841</td><td align="right">70214</td><td align="right">35450</td><th>
+</th><td align="right">17123</td><td align="right">65068</td><td align="right">42332</td><th></th><td align="right">6910</td><td align="right">37679</td><td align="right">64497
+</td></tr><tr><th>4</th><td align="right">47057</td><td align="right">70994</td><td align="right">71539</td><th>
+</th><td align="right">50083</td><td align="right">67691</td><td align="right">68229</td><td align="right"></td><td align="right">143948</td><td align="right">63508</td><td align="right">62539
+</td></tr><tr><th>5</th><td align="right">66813</td><td align="right">49802</td><td align="right">101691</td><th>
+</th><td align="right">62813</td><td align="right">54625</td><td align="right">114180</td><th></th><td align="right">64800</td><td align="right">287524</td><td align="right">230263
+
+</td></tr><tr><th>E</th><td align="right">535</td><td align="right">252</td><td align="right">600</td><th>
+</th><td align="right">553</td><td align="right">271</td><td align="right">549</td><th></th><td align="right">406</td><td align="right">144</td><td align="right">391
+
+</td></tr><tr><th>C</th><td align="right">24656</td><td align="right">80486</td><td align="right">50406</td><th>
+</th><td align="right">26330</td><td align="right">84761</td><td align="right">41034</td><th></th><td align="right">250518</td><td align="right">83608</td><td align="right">71503</td><td align="right">
+
+</td></tr><tr><th>D</th><td align="right">281519</td><td align="right">90496</td><td align="right">66810</td><th></th><td align="right">250518</td><td align="right">83608</td><td align="right">71503</td><th></th><td align="right">303063</td><td align="right">92264</td><td align="right">16486
+
+</td></tr><tr><th>SD</th><td align="right">413450</td><td align="right">241184</td><td align="right">218102</td><th>
+</th><td align="right">422542</td><td align="right">222883</td><td align="right">207893</td><th></th><td align="right">801755</td><td align="right">248968</td><td align="right">306955
+
+
+
+</td></tr><tr><th>Easy</th><td align="right">11261</td><td align="right">2976</td><td align="right">3340</td><th></th><td align="right">11109</td><td align="right">2800</td><td align="right">3520</td><th></th><td align="right">2423</td><td align="right">2009</td><td align="right">2846
+</td></tr><tr><th>Medium</th><td align="right">66183</td><td align="right">191627</td><td align="right">53365</td><th></th><td align="right">63676</td><td align="right">199871</td><td align="right">53806</td><th></th><td align="right">23436</td><td align="right">307571</td><td align="right">76084
+</td></tr><tr><th>Hard</th><td align="right">1419023</td><td align="right">90883</td><td align="right">627091</td><th></th><td align="right">1232282</td><td align="right">81677</td><td align="right">530257</td><th></th><td align="right">3525663</td><td align="right">175879</td><td align="right">1247828
+
+</td></tr><tr><th>GA-E</th><td align="right">4128</td><td align="right">4523</td><td align="right">3100</td><th></th><td align="right">4065</td><td align="right">4596</td><td align="right">3057</td><th></th><td align="right">2701</td><td align="right">2963</td><td align="right">2603
+</td></tr><tr><th>GA-M</th><td align="right">36735</td><td align="right">19186</td><td align="right">32651</td><th></th><td align="right">33808</td><td align="right">17242</td><td align="right">29536</td><th></th><td align="right">24416</td><td align="right">30124</td><td align="right">107915
+</td></tr><tr><th>GA-H</th><td align="right">163636</td><td align="right">104389</td><td align="right">785814</td><th></th><td align="right">193622</td><td align="right">104655</td><td align="right">601404</td><th></th><td align="right">288024</td><td align="right">160301</td><td align="right">1479323
+
+
+
+</td></tr><tr><td>Total average:</td><th colspan="3">5680705</th><th></th><th colspan="3">5187928</th><th></th><th colspan="3">10317368
+
+</th></tr></tbody></table>
+</p><p>
+<b>Note!</b> These numbers are with our program versions 15.3.2008 (GA and CA) and 30.4.2008 (ACO). The current versions are slightly more effective, e.g. ACO total with the latest version is approx. 8700000 trials (the version mentioned in the HK presentation slides above). Updated mumbers will appear here after they are published in some conference etc.
+
+</p><p>
+</p><hr>
+<p>
+
+<font color="#FF0000">
+<b>The time that Cultural algorithm needs previous benchmark Sudokus, average and maximum of 100 runs:</b><br></font>
+</p><p>
+
+<table border="1">
+<caption><em>Average and maximum times [seconds] needed (of 100 runs) to Solve benchmark Sudokus with our latest CA version (16.6.2008)</em></caption>
+<tbody><tr><th rowspan="2">Difficulty rating</th><th colspan="3">Average</th><th></th><th colspan="3">Maximum
+</th></tr><tr><th>a</th><th>b</th><th>c</th><th></th><th>a</th><th>b</th><th>c
+
+</th></tr><tr><th>1</th><td align="right">0.055</td><td align="right">0.026</td><td align="right">0.179</td><th>
+</th><td align="right">0.290</td><td align="right">0.100</td><td align="right">1.365
+
+</td></tr><tr><th>2</th><td align="right">0.308</td><td align="right">1.058</td><td align="right">0.424</td><th>
+</th><td align="right">1.492</td><td align="right">7.633</td><td align="right">1.967
+
+</td></tr><tr><th>3</th><td align="right">0.606</td><td align="right">2.109</td><td align="right">1.292</td><th>
+</th><td align="right">2.511</td><td align="right">8.471</td><td align="right">8.171
+
+</td></tr><tr><th>4</th><td align="right">1.632</td><td align="right">2.814</td><td align="right">2.168</td><th>
+</th><td align="right">5.667</td><td align="right">19.527</td><td align="right">15.743
+
+</td></tr><tr><th>5</th><td align="right">2.759</td><td align="right">2.010</td><td align="right">3.988</td><th>
+</th><td align="right">13.959</td><td align="right">15.510</td><td align="right">22.062
+
+
+
+</td></tr><tr><th>E</th><td align="right">0.022</td><td align="right">0.011</td><td align="right">0.021</td><th>
+</th><td align="right">0.084</td><td align="right">0.031</td><td align="right">0.085
+
+</td></tr><tr><th>C</th><td align="right">0.762</td><td align="right">2.348</td><td align="right">1.691</td><th>
+</th><td align="right">4.414</td><td align="right">8.702</td><td align="right">8.160
+
+</td></tr><tr><th>D</th><td align="right">7.616</td><td align="right">3.489</td><td align="right">2.135</td><th>
+</th><td align="right">26.326</td><td align="right">35.222</td><td align="right">10.932
+
+</td></tr><tr><th>SD</th><td align="right">12.441</td><td align="right">7.053</td><td align="right">5.980</td><th>
+</th><td align="right">129.393</td><td align="right">35.288</td><td align="right">26.444
+
+
+
+</td></tr><tr><th>Easy</th><td align="right">0.428</td><td align="right">0.094</td><td align="right">0.109</td><th>
+</th><td align="right">2.112</td><td align="right">0.629</td><td align="right">0.763
+
+</td></tr><tr><th>Medium</th><td align="right">2.280</td><td align="right">7.874</td><td align="right">2.164</td><th>
+</th><td align="right">9.769</td><td align="right">34.677</td><td align="right">11.861
+
+</td></tr><tr><th>Hard</th><td align="right">34.015</td><td align="right">3.436</td><td align="right">17.952</td><th>
+</th><td align="right">201.531</td><td align="right">18.102</td><td align="right">89.774
+
+
+
+</td></tr><tr><th>GA-E</th><td align="right">0.158</td><td align="right">0.196</td><td align="right">0.151</td><th>
+</th><td align="right">1.112</td><td align="right">0.928</td><td align="right">0.951
+
+</td></tr><tr><th>GA-M</th><td align="right">1.031</td><td align="right">0.842</td><td align="right">1.162</td><th>
+</th><td align="right">5.584</td><td align="right">5.682</td><td align="right">7.969
+
+</td></tr><tr><th>GA-H</th><td align="right">6.405</td><td align="right">3.693</td><td align="right">24.441</td><th>
+</th><td align="right">28.152</td><td align="right">28.357</td><td align="right">145.364
+
+
+</td></tr><tr><td>Average | Sum</td><th>3.810</th><th colspan="2">171.428
+</th><th></th><th>22.286</th><th colspan="2">1002.866
+
+</th></tr></tbody></table>
+Times are with 2.8 GHz quad-core 64-bit Intel Xeon processor (no parallel processing, only one core used). As a comparison 3.0 GHz Pentium4 needed approx. 50% more time.
+</p><p>
+<b>Note!</b> The minimum times are not so interesting, because the algorithm is heuristic and sometimes by luck it finds the solution even for the difficult Sudokus extremely fast. The longest minimum time was measured to be 0.075 seconds.
+</p><p>
+Our Java program runs with different Sudokus with slightly different speeds, Sudoku 1b runs slowest as 23557 trial/second and 8c runs fastest as 30265 trials/s. We think it due that, if there is less givens, the program is able to make swaps faster: 1b has 36 givens, the third largest number of the test set, and the other two are also among slow running Sudokus, 8c has 22 givens, which is tied lowest number in the test set. Average speed for solving all Sudokus above was 29133 trials/s (4994219 trials / 171.43s).
+</p><p>
+<b>AI Escargot:</b> This Sudoku proved to be most difficult for our method. It needed {18253, 1761291, 8514029} trials and {0.605, 59.911, 292.292} seconds to be solved as {min, mean, max}. Add it's times to the other 45 benchmark Sudokus and the total times needed for all 46 Sudokus would be in average 5.03 seconds (sum 231.4s) and sum of maximum times 1295s (avg. 28.2s). Unlike all the other benchmark Sudokus, this was never solved extremely fast.
+
+</p><p>
+</p><hr>
+<p>
+
+
+<font color="#FF0000">
+<b>The test Sudoku instances used in the paper:</b><br></font>
+<font color="#000000">[2] Mantere, Timo and Janne Koljonen (2007). <a href="http://ieeexplore.ieee.org/iel5/4424445/4424446/04424632.pdf?tp=&amp;arnumber=4424632&amp;isnumber=4424446">
+Solving, Rating and Generating Sudoku Puzzles with GA</a>. In 2007 IEEE Congress on Evolutionary computation – CEC2007, 25-28 September, Singapore, pages 1382-1389.</font>
+</p><p>
+In table 1 they are the same as s01a.txt to s09a.txt above (9 instances, 1 to 9 only a:s).<br>
+In table 2 they are the same as s01a.txt to s09c.txt above (27 instances, 1 to 9, each a, b and c).<br>
+in table 5 <a href="http://lipas.uwasa.fi/~timan/sudoku/s10a.txt">Easy 1</a>, <a href="http://lipas.uwasa.fi/~timan/sudoku/s10b.txt">Easy 2</a>, <a href="http://lipas.uwasa.fi/~timan/sudoku/s10c.txt">Easy 3</a>, <a href="http://lipas.uwasa.fi/~timan/sudoku/s11a.txt">Medium</a>, <a href="http://lipas.uwasa.fi/~timan/sudoku/s12a.txt">Hard</a> are respectively the same as s10a.txt, s10b.txt, s10c.txt, s11a.txt and s12a.txt above.
+</p><p>
+
+</p><hr>
+
+<p>
+<font color="#FF0000">
+<b>The test Sudoku instances used in the paper:</b><br></font>
+<font color="#000000">[3] Mantere, Timo and Janne Koljonen (2006). <a href="http://www.stes.fi/scai2006/proceedings/step2006-86-mantere-solving-and-rating-sudoku-puzzles.pdf">Solving and rating Sudoku puzzles with genetic algorithms</a>. In E. Hyvönen, T. Kauppinen, J. Kortela, M. Laukkanen, T. Raiko, and K. Viljanen (eds.) New Developments in Artificial Intellingence and the Semantic Web - Proceedings of the 12th Finnish Artificial Conference STeP 2006, Helsinki University of Technology, Espoo, Finland, October 26-27, 2006, pp. 86-92.</font>
+</p><p>
+In table 1 and figure 5 they are the same as s01a.txt to s09a.txt above (9 instances, 1 to 9 only a:s).</p><p>
+</p><p>
+</p><hr>
+<p>
+
+<font color="#FF0000"><b>LINKS</b></font></p><p>
+
+Evolutionary algorithms course <a href="http://www.uwasa.fi/~timan/sudoku/EA_ht_2008.pdf" target="new">project work</a> about Sudokus
+</p><p>
+
+Sudoku in <a href="http://en.wikipedia.org/wiki/Sudoku" target="new">Wikipedia</a>
+</p><p>
+
+<a href="http://www.uwasa.fi/sahkoautomaatio/auto/autoihmiset.html" target="new">Automation engineering research group</a>
+<br>
+</p><p>
+<a href="http://www.uwasa.fi/itt/teti/" target="new">
+Department of Electrical Engineering and Production Automation</a>
+
+</p><p>  
+<a href="http://www.uwasa.fi/" target="new">University of Vaasa</a>.
+
+
+</p><p>
+
+
+
+</p><hr>
+<br><b><font color="#FF0000">Updated 17.06.2008&nbsp;</font></b>
+<p>
+</p><hr>
+<br>&nbsp;
+<br>&nbsp;
+
+
+</body></html>

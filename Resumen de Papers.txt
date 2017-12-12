@@ -1,0 +1,84 @@
+Resumen de Papers
+
+Rory Douglas 2014
+
+Mantienen bien las zonas
+Inicializacion -> random por zonas
+Crossover -> tournament selection
+Mutacion -> swap en zona random
+Elite -> el mejor sobrevive siempre
+Fitness -> bad edges
+
+Mantere and Koljonen 2007
+
+Mantienen bien las zonas
+Inicializacion -> random por zonas
+Population -> 21
+Elitism Ratio -> 1 (uno sobrevive, los otros 20 cambian)
+Parent Selection:
+for( i=POP-1; i>=ELIT; i--){
+	x1 = ( int )(i * Math.random() );
+	x2 = ( int )(i * Math.random() );
+	. . .
+}
+Mutacion -> swap en zona random (no permite swap si quedan repetidos más de 3 veces)
+Restarts a las 2000 iteraciones
+Si se mantiene el top, aumentan el fitness del top en 1 por cada mantención
+Agregar al fitness la cantidad de digitos repetidos en la misma fila o columna que un fixed_position
+
+Kazemi and Fatemi 2014
+
+Mapean la funcion de fitness a otro intervalo usando max-min normalization
+Mantienen bien las zonas Y las filas
+Selection -> ruleta con pesos
+Crossover -> por zonas, generan 2 hijos complementarios
+Usan una probabilidad de Crossover (sino, los padres pasan a ser hijos)
+2 mutaciones:
+	-> swap por filas, si no se mantienen las condiciones hacen otro swap en los que se repiten
+	-> para cada fila, reemplazarla por una fila random
+restarts a las 10.000 iteraciones
+maximo 100.000 iteraciones
+
+INCLUYE COMPARACION POR GENERACIONES CON MANTERE AND KOLJONEN
+
+
+K. N. Das, S. Bhatia, S. Puri and K. Deep 2012
+
+Poblacion -> 90
+Inicializacion -> Random numbers en los lugares en blanco (espacio de búsqueda mayor)
+Crossover probability -> 0.8
+Crossover -> por filas
+Mutation -> cada lugar en blanco se reemplaza con uno random con 0.2
+Duplican la población y luego seleccionan la mitad
+"Remove Repetition of givens": para cada fila y columna, eliminan los numeros que sean iguales a los givens reemplazandolos por un color valido. Se aplica luego de inicialización, crossover y mutación
+
+Reset points segun givens -> 2000 if there are 27 or less givens, 350 if there are 28 or 29 givens, 300 if there are 30 or 31 givens and 200 if there are 32 or more givens
+
+INCLUYE COMPARACION POR GENERACIONES CON MANTERE AND KOLJONEN
+
+
+Deng and Li 2011
+
+population -> 21
+duplican la poblacion y se quedan con la mitad
+aumentan el fitness del mejor en cada iteracion
+seleccion -> dos padres DISTINTOS random entre 2 y upper_bound, donde:
+	si fitness es < 6 upper bound = 6
+	si fitness entre 6 y 11 upper bound = 11
+	si fitness entre 11 y 16 upper bound = 16
+	si fitness mayor a 16 upper_bound = 21
+crossover -> por zonas
+mutation -> swap dentro de una zona
+	cuando el fitness es > 10 hacen un swap
+	fitness entre 6 y 10 hacen entre 1 y 5 swaps
+	fitness menor a 6 hacen entre 1 y 8 swaps
+NO RESUELVE SUDOKUS DIFICILES, no hay comparacion con otros papers
+
+
+Los papers de Mantere:
+
+11. Mantere, T., Koljonen, J.: Solving, Rating and Generating Sudoku Puzzles with GA. 2007 IEEE Congress on Evolutionary Computation-CEC2007, Singapore, pp. 1382–1389 (2007)
+
+12. Mantere, T., Koljonen, J.: Solving and analyzing Sudokus with cultural algorithms. 2008 IEEE Congress Computational Intelligence—WCCI2008, 1–6 June, Hong Kong, China, pp. 4054–4061 (2008)
+
+13. Mantere, T., Koljonen, J.: Ant Colony Optimization and a Hybrid Genetic Algorithm for Sudoku Solving. In: 15th International Conference on Soft Computing, Brno, Czech Republic, Mendell 2009,pp. 41–48 (2009)
