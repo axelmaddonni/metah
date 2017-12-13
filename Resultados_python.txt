@@ -1,0 +1,61 @@
+1 stars
+
+Count 	 100
+Min 	 12
+Max 	 29
+Med 	 20
+Avg 	 19.890000
+Std 	 3.599708
+Time 	 4.741091
+
+2 stars
+
+Count 	 100
+Min 	 68
+Max 	 423
+Med 	 136
+Avg 	 160.210000
+Std 	 69.041045
+Time 	 102.874158
+
+3 stars
+
+4 stars
+
+5 stars
+
+Count 	 100
+Min 	 196
+Max 	 9790
+Med 	 1357
+Avg 	 2170.580000
+Std 	 2111.625020
+Time 	 271.247810
+
+Easy
+
+Count 	 100
+Min 	 5
+Max 	 17
+Med 	 11
+Avg 	 10.680000
+Std 	 2.288580
+Time 	 2.588324
+
+Challenging
+
+Count 	 100
+Min 	 188
+Max 	 2438
+Med 	 374
+Avg 	 487.550000
+Std 	 364.147014
+Time 	 118.609656
+
+Difficult
+
+(demasiado tiempo)
+
+Super Difficult
+
+(demasiado tiempo)
