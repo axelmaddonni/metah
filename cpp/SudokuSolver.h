@@ -17,7 +17,9 @@ class SudokuSolver {
 public:
 	SudokuSolver(int sudoku_size, std::vector<int> init_values);
 
-	int solve();
+	void restartAvailableNumbers();
+
+	int solve(int pop_size, int el_size, double mut_proba, int max_iters);
 
 	void initPopulation();
 
@@ -51,7 +53,11 @@ public:
 
 	std::vector<int> getInitValues();
 
+	double getMutationProba();
+
 	int getSize();
+
+	int tournamentSelection();
 
 private:
 	int sudoku_size;
@@ -65,11 +71,15 @@ private:
 	std::vector<std::set<int>> available_numbers_by_pos;
 
 	std::vector<SudokuChromosome> population;
-	int population_size = 100;
-	int elite_size = 1;
+	int population_size ;
+	int elite_size ;
+	double mutation_proba ;
+	int max_iters_without_improvement;
 
-	SudokuChromosome* last_sol;
+	SudokuChromosome* last_sol = NULL;
 	int last_best_fitness;
+
+	std::vector<std::vector<std::vector<int>>> belief_space;
 };
 
 class SudokuChromosome {
@@ -107,7 +117,6 @@ private:
 	std::vector<std::vector<int>> count_by_col;
 };
 
-
 double getRandomNumber() {
 	return ((double) rand() / (RAND_MAX));
 }
@@ -115,9 +124,23 @@ double getRandomNumber() {
 SudokuSolver::SudokuSolver(int size, std::vector<int> init_values) {
 	this->sudoku_size = size;
 	this->init_values = init_values;
+	this->fixed_positions = std::set<int>();
+	this->free_positions = std::vector<int>();
+	this->restartAvailableNumbers();
 
-	fixed_positions = std::set<int>();
-	free_positions = std::vector<int>();
+	std::vector<std::vector<std::vector<int>>> belief_space;
+	for (int i = 0; i < sudoku_size; ++i) {
+		belief_space.push_back(std::vector<std::vector<int>>(sudoku_size, std::vector<int>(sudoku_size, 0)));
+	}
+
+	this->belief_space = belief_space;
+}
+
+void SudokuSolver::restartAvailableNumbers() {
+	this->available_numbers_by_zone = std::vector<std::set<int>>();
+	this->available_numbers_by_row = std::vector<std::set<int>>();
+	this->available_numbers_by_col = std::vector<std::set<int>>();
+	this->available_numbers_by_pos = std::vector<std::set<int>>();
 
 	for (int zone = 0; zone < sudoku_size; ++zone) {
 		int numbers[] = {1,2,3,4,5,6,7,8,9};
@@ -163,20 +186,29 @@ SudokuSolver::SudokuSolver(int size, std::vector<int> init_values) {
 	}
 }
 
-int SudokuSolver::solve() {
+int SudokuSolver::solve(int pop_size, int el_size, double mut_proba, int max_iters) {
 	srand(time(NULL));
+
+	this->population_size = pop_size;
+	this->elite_size = el_size;
+	this->mutation_proba = mut_proba;
+	this->max_iters_without_improvement = max_iters;
 
 	// std::cout << "Initial Grid \n";
 	// this->printGrid(this->init_values);
 
 	this->initPopulation();
+
 	int iter_count = 0;
 	int iters_without_improvement = 0;
 	int best_fitness = this->getBestFitness();
 
-	while (this->getBestFitness() > 0 and iter_count < 100000) {
+	while (this->getBestFitness() > 0 and iter_count < 50000) {
 
 		int new_fitness = this->getBestFitness();
+
+		// std::cout << "iteracion: " << iter_count << " new_fitness: " << new_fitness << " best_fitness:" << best_fitness << std::endl;
+
 		if (new_fitness < best_fitness) {
 			best_fitness = new_fitness;
 			// std::cout << "iteracion: " << iter_count << " best_fitness:" << best_fitness << std::endl;
@@ -187,13 +219,14 @@ int SudokuSolver::solve() {
 			iters_without_improvement++;
 		}
 
-		if (iters_without_improvement == 2000) {
-			std::cout << "Restarting..." << std::endl;
+		if (iters_without_improvement == max_iters_without_improvement) {
+			// std::cout << "Restarting..." << std::endl;
 			this->initPopulation();
 			iters_without_improvement = 0;
 			best_fitness = this->getBestFitness();
 
 		} else {
+
 			for (int i = this->population_size-1; i >= elite_size; i--) {
 
 				bool repeated = true;
@@ -201,8 +234,8 @@ int SudokuSolver::solve() {
 
 				while (repeated) {
 
-					int p1_index = (int)(i * getRandomNumber());
-					int p2_index = (int)(i * getRandomNumber());
+					int p1_index = tournamentSelection();
+					int p2_index = tournamentSelection();
 
 					SudokuChromosome child (this, population[p1_index], this->population[p2_index]);
 					child.mutate();
@@ -227,7 +260,7 @@ int SudokuSolver::solve() {
 				}
 			}
 
-			reorderPopulation();
+			this->reorderPopulation();
 		}
 		iter_count++;
 	}
@@ -261,10 +294,13 @@ void SudokuSolver::initPopulation() {
 }
 
 void SudokuSolver::reorderPopulation() {
+
 	if (this->last_sol != NULL and *(this->last_sol) == this->getBestSolution()) {
 		this->getBestSolution().age();
 	}
+
 	std::sort (population.begin(), population.end(), chromosome_compare);
+
 	this->last_sol = new SudokuChromosome(this->getBestSolution());
 	this->last_best_fitness = this->last_sol->getFitness();
 }
@@ -392,6 +428,22 @@ std::vector<int> SudokuSolver::getInitValues() {
 	return init_values;
 }
 
+double SudokuSolver::getMutationProba() {
+	return mutation_proba;
+}
+
+int SudokuSolver::tournamentSelection() {
+	int tournament_size = 3;
+	int chosen = population_size;
+	for (int i = 0; i < tournament_size; ++i) {
+		int participant = rand() % population_size;
+		if (participant < chosen) {
+			chosen = participant;
+		}
+	}
+
+	return chosen;
+}
 
 SudokuChromosome::SudokuChromosome(SudokuSolver* s) {
 	// Crea individuo random
@@ -455,66 +507,36 @@ int SudokuChromosome::getSampleFromVector(const std::vector<int>& s) {
 	return *it;
 }
 
- // Version de Mantere y Koljonen 
 void SudokuChromosome::mutate() {
+	for (int zone_number = 0; zone_number < solver->getSize(); ++zone_number) {
 
-	if (getRandomNumber() > 0.6) {
-		return;
-	}
+		if (getRandomNumber() <= solver->getMutationProba()) {
 
-	int zone_number = rand() % 9; 
+			std::vector<int> indexes = solver->getZoneIndexesByNumber(zone_number);
 
-	std::vector<int> indexes = solver->getZoneIndexesByNumber(zone_number);
+			int index1 = getSampleFromVector(indexes);
+			int index2 = getSampleFromVector(indexes);
 
-	int index1 = getSampleFromVector(indexes);
-	int index2 = getSampleFromVector(indexes);
+			while (index1 == index2
+				or solver->getFixedPositions().count(index1) != 0
+				or solver->getFixedPositions().count(index2) != 0 ) {
 
-	while (index1 == index2
-		or solver->getFixedPositions().count(index1) != 0
-		or solver->getFixedPositions().count(index2) != 0 ) {
+				index1 = getSampleFromVector(indexes);
+				index2 = getSampleFromVector(indexes);
+			}
 
-		index1 = getSampleFromVector(indexes);
-		index2 = getSampleFromVector(indexes);
-	}
+			if (solver->getAvailableNumbersByPos(index1).count(this->values[index2]) != 0 and
+				solver->getAvailableNumbersByPos(index2).count(this->values[index1]) != 0) {
 
-	/* Esta mejora de Mantere no la replicamos
-	count_by_row[solver->getRowNumberByPos(index1)][this->values[index2]-1] +
-		count_by_col[solver->getColNumberByPos(index1)][this->values[index2]-1] <= 2 and
-		count_by_row[solver->getRowNumberByPos(index2)][this->values[index1]-1] +
-		count_by_col[solver->getColNumberByPos(index2)][this->values[index1]-1] <= 2
-	*/
+				int tmp = this->values[index1];
+				this->values[index1] = this->values[index2];
+				this->values[index2] = tmp;
 
-	// int tmp = this->values[index1];
-	// this->values[index1] = this->values[index2];
-	// this->values[index2] = tmp;
-
-	// updateFitness();
-
-	if (solver->getAvailableNumbersByPos(index1).count(this->values[index2]) != 0 and
-		solver->getAvailableNumbersByPos(index2).count(this->values[index1]) != 0) {
-		int tmp = this->values[index1];
-		this->values[index1] = this->values[index2];
-		this->values[index2] = tmp;
-
-		updateFitness();
-	}
-}
-
-/*
-void SudokuChromosome::mutate() {
-
-	std::vector<int> indexes = solver->getFreePositions();
-	std::random_shuffle(std::begin(indexes), std::end(indexes));
-
-	for (int i : indexes) {
-		if (getRandomNumber() <= 0.2) {
-			this->values[i] = getSampleFromSet(solver->getAvailableNumbersByPos(i));
+				updateFitness();
+			}
 		}
 	}
-
-	updateFitness();
 }
-*/
 
 int SudokuChromosome::updateFitness() {
 	this->fitness = 0;
