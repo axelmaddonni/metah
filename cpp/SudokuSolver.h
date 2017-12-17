@@ -9,6 +9,7 @@
 #include <chrono>
 #include <array>
 #include <iterator>
+#include <ctime>
 
 class SudokuChromosome;
 
@@ -71,9 +72,9 @@ private:
 	std::vector<std::set<int>> available_numbers_by_pos;
 
 	std::vector<SudokuChromosome> population;
-	int population_size ;
-	int elite_size ;
-	double mutation_proba ;
+	int population_size;
+	int elite_size;
+	double mutation_proba;
 	int max_iters_without_improvement;
 
 	SudokuChromosome* last_sol = NULL;
@@ -107,7 +108,7 @@ private:
 
 	int getSampleFromSet(const std::set<int>& s);
 
-	int getSampleFromVector(const std::vector<int>& s);
+	int getSampleFromVector(std::vector<int>& s, bool remove);
 
 	SudokuSolver* solver;
 	std::vector<int> values;
@@ -197,13 +198,15 @@ int SudokuSolver::solve(int pop_size, int el_size, double mut_proba, int max_ite
 	// std::cout << "Initial Grid \n";
 	// this->printGrid(this->init_values);
 
+	clock_t begin = clock();
+
 	this->initPopulation();
 
 	int iter_count = 0;
 	int iters_without_improvement = 0;
 	int best_fitness = this->getBestFitness();
 
-	while (this->getBestFitness() > 0 and iter_count < 50000) {
+	while (this->getBestFitness() > 0 and iter_count < 50000 and (double(clock() - begin) / CLOCKS_PER_SEC) < 180) {
 
 		int new_fitness = this->getBestFitness();
 
@@ -211,8 +214,8 @@ int SudokuSolver::solve(int pop_size, int el_size, double mut_proba, int max_ite
 
 		if (new_fitness < best_fitness) {
 			best_fitness = new_fitness;
-			// std::cout << "iteracion: " << iter_count << " best_fitness:" << best_fitness << std::endl;
 			iters_without_improvement = 0;
+			// std::cout << "iteracion: " << iter_count << " best_fitness:" << best_fitness << std::endl;
 			// this->printGrid(this->getBestSolution().getValues());
 
 		} else {
@@ -221,6 +224,8 @@ int SudokuSolver::solve(int pop_size, int el_size, double mut_proba, int max_ite
 
 		if (iters_without_improvement == max_iters_without_improvement) {
 			// std::cout << "Restarting..." << std::endl;
+			// std::cout << "best_fitness:" << best_fitness << std::endl;
+			// this->printGrid(this->getBestSolution().getValues());
 			this->initPopulation();
 			iters_without_improvement = 0;
 			best_fitness = this->getBestFitness();
@@ -265,7 +270,7 @@ int SudokuSolver::solve(int pop_size, int el_size, double mut_proba, int max_ite
 		iter_count++;
 	}
 
-	if (iter_count == 100000) {
+	if (this->getBestFitness() > 0) {
 		return 0;
 	}
 
@@ -500,38 +505,43 @@ int SudokuChromosome::getSampleFromSet(const std::set<int>& s) {
 	return *it;
 }
 
-int SudokuChromosome::getSampleFromVector(const std::vector<int>& s) {
+int SudokuChromosome::getSampleFromVector(std::vector<int>& s, bool remove=false) {
 	double r = rand() % s.size();
 	std::vector<int>::const_iterator it(s.begin());
 	advance(it,r);
-	return *it;
+	int value = *it;
+	if (remove) {
+		s.erase(it);
+	}
+	return value;
 }
 
 void SudokuChromosome::mutate() {
-	for (int zone_number = 0; zone_number < solver->getSize(); ++zone_number) {
-
-		if (getRandomNumber() <= solver->getMutationProba()) {
-
-			std::vector<int> indexes = solver->getZoneIndexesByNumber(zone_number);
-
-			int index1 = getSampleFromVector(indexes);
-			int index2 = getSampleFromVector(indexes);
-
-			while (index1 == index2
-				or solver->getFixedPositions().count(index1) != 0
-				or solver->getFixedPositions().count(index2) != 0 ) {
-
-				index1 = getSampleFromVector(indexes);
-				index2 = getSampleFromVector(indexes);
+	// Elige al azar una posicion mal coloreada y la swapea con otro de su zona
+	if (getRandomNumber() <= solver->getMutationProba()) {
+		std::vector<int> indexes = solver->getFreePositions();
+		bool bad_colored = false;
+		int index1;
+		while(not bad_colored and indexes.size() > 0) {
+			index1 = getSampleFromVector(indexes, true);
+			if (count_by_row[solver->getRowNumberByPos(index1)][values[index1]-1] != 1 or
+				count_by_col[solver->getColNumberByPos(index1)][values[index1]-1] != 1) {
+				bad_colored = true;
 			}
+		}
 
+		if (bad_colored) {
+			int zone_number = solver->getZoneNumberByPos(index1);
+			std::vector<int> zone_indexes = solver->getZoneIndexesByNumber(zone_number);
+			int index2 = getSampleFromVector(zone_indexes, true);
+			while (index1 == index2 or solver->getFixedPositions().count(index2) != 0) {
+				index2 = getSampleFromVector(zone_indexes, true);
+			}
 			if (solver->getAvailableNumbersByPos(index1).count(this->values[index2]) != 0 and
 				solver->getAvailableNumbersByPos(index2).count(this->values[index1]) != 0) {
-
 				int tmp = this->values[index1];
 				this->values[index1] = this->values[index2];
 				this->values[index2] = tmp;
-
 				updateFitness();
 			}
 		}

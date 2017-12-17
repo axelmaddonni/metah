@@ -79,7 +79,7 @@ void test_solver(std::vector<int> values, int pop_size, int elite_size, double m
 
 		} else {
 			// printf("No se resolvio el sudoku luego de %.2f segundos :( \n", elapsed_secs);
-			s.printGrid(s.getBestSolution().getValues());
+			// s.printGrid(s.getBestSolution().getValues());
 		}
 
 	}
@@ -107,22 +107,21 @@ void test_solver(std::vector<int> values, int pop_size, int elite_size, double m
 	}
 	std::cout << "]" << std::endl;
 
-	avg_tiempos = avg_tiempos / 30;
-	avg_iteraciones = avg_iteraciones / 30;
+	avg_tiempos = avg_tiempos / 100;
+	avg_iteraciones = avg_iteraciones / 100;
 
 	std::cout << "Promedio tiempos: " << avg_tiempos << std::endl;
 	std::cout << "Promedio iteraciones: " << avg_iteraciones << std::endl;
 }
 
 int main(int argc, const char* argv[]) {
-
 	
 	int pop_size = 100;
 	int elite_size = 5;
 	double mutation_proba = 0.6;
 	int max_iters = 300;
 
-	for (int difficulty = 1; difficulty <= 9; ++difficulty)
+	for (int difficulty = 8; difficulty <= 9; ++difficulty)
 	{
 		std::cout << "Corriendo SudokuSolver con dificultad " << difficulty << std::endl;
 		std::vector<int> values = getSudokuExample(difficulty);
